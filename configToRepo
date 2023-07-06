@@ -1,0 +1,26 @@
+#!/bin/bash
+
+file_configs=("btop" "cava" "dunst" "hypr" "kitty" "neofetch" "nvim" "ranger" "swappy" "swaylock" "waybar" "wlogout" "wofi" "starship.toml")
+
+path="dot_config/"
+
+for config in ${file_configs[@]}
+do
+    filePath=~/.config/$config
+    if [ -e "$filePath" ];then
+        if [ -d "$filePath" ];then
+            cp -r "$filePath" $path
+        else
+            cp "$filePath" $path
+        fi
+    else
+        echo "config not found"
+    fi
+done
+
+cp -r /usr/share/sddm/themes/sdt/ sddm-theme
+
+# new_config=($(ls --group-directories-first $configPath))
+
+# echo ${file_configs[*]}
+# echo ${new_config[*]}
