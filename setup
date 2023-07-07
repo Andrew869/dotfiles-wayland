@@ -1,27 +1,27 @@
 #!/bin/bash
 
-# Script by SolDoesTech - https://www.youtube.com/@SolDoesTech
+# Original script by SolDoesTech - https://www.youtube.com/@SolDoesTech
 
 # Define the software that would be inbstalled 
 #Need some prep work
-# prep_stage=(
-#     qt5-wayland 
-#     qt5ct
-#     qt6-wayland 
-#     qt6ct
-#     qt5-svg
-#     qt5-quickcontrols2
-#     qt5-graphicaleffects
-#     gtk3 
-#     polkit-gnome 
-#     pipewire 
-#     wireplumber 
-#     jq 
-#     wl-clipboard 
-#     cliphist 
-#     python-requests 
-#     pacman-contrib
-# )
+prep_stage=(
+    qt5-wayland 
+    qt5ct
+    qt6-wayland 
+    qt6ct
+    qt5-svg
+    qt5-quickcontrols2
+    qt5-graphicaleffects
+    gtk3 
+    polkit-gnome 
+    pipewire 
+    wireplumber 
+    jq 
+    wl-clipboard 
+    cliphist 
+    python-requests 
+    pacman-contrib
+)
 
 #software for nvidia GPU only
 nvidia_stage=(
@@ -32,49 +32,7 @@ nvidia_stage=(
     libva-nvidia-driver-git
 )
 
-#the main packages
-# install_stage=(
-#     kitty 
-#     mako 
-#     waybar
-#     swww 
-#     swaylock-effects 
-#     wofi 
-#     wlogout 
-#     xdg-desktop-portal-hyprland 
-#     swappy 
-#     grim 
-#     slurp 
-#     thunar 
-#     btop
-#     firefox
-#     thunderbird
-#     mpv
-#     pamixer 
-#     pavucontrol 
-#     brightnessctl 
-#     bluez 
-#     bluez-utils 
-#     blueman 
-#     network-manager-applet 
-#     gvfs 
-#     thunar-archive-plugin 
-#     file-roller
-#     starship 
-#     papirus-icon-theme 
-#     ttf-jetbrains-mono-nerd 
-#     noto-fonts-emoji 
-#     lxappearance 
-#     xfce4-settings
-#     nwg-look-bin
-#     sddm
-# )
-
 mapfile -t install_stage < "pkgs.txt"
-
-# for str in ${myArray[@]}; do
-#   echo $str
-# done
 
 # set some colors
 CNT="[\e[1;36mNOTE\e[0m]"
@@ -130,12 +88,14 @@ sleep 1
 
 # attempt to discover if this is a VM or not
 echo -e "$CNT - Checking for Physical or VM..."
-ISVM=$(hostnamectl | grep Chassis)
-echo -e "Using $ISVM"
-if [[ $ISVM == *"vm"* ]]; then
+chassis=$(hostnamectl | grep Chassis)
+echo -e "Using $chassis"
+if [[ $chassis == *"vm"* ]]; then
     echo -e "$CWR - Please note that VMs are not fully supported and if you try to run this on
     a Virtual Machine there is a high chance this will fail."
     sleep 1
+elif [[ $chassis == *"laptop"* ]];then
+    prep_stage+=(brightnessctl)
 fi
 
 # let the user know that we will use sudo
@@ -143,11 +103,11 @@ echo -e "$CNT - This script will run some commands that require sudo. You will b
 If you are worried about entering your password then you may want to review the content of the script."
 sleep 1
 
-# give the user an option to exit out
+give the user an option to exit out
 read -rep $'[\e[1;33mACTION\e[0m] - Would you like to continue with the install (y,n) ' CONTINST
 if [[ $CONTINST == "Y" || $CONTINST == "y" ]]; then
     echo -e "$CNT - Setup starting..."
-    # sudo touch /tmp/hyprv.tmp
+    sudo touch /tmp/dot_config.tmp
 else
     echo -e "$CNT - This script will now exit, no changes were made to your system."
     exit
@@ -211,10 +171,10 @@ read -rep $'[\e[1;33mACTION\e[0m] - Would you like to install the packages? (y,n
 if [[ $INST == "Y" || $INST == "y" ]]; then
 
     # Prep Stage - Bunch of needed items
-    # echo -e "$CNT - Prep Stage - Installing needed components, this may take a while..."
-    # for SOFTWR in ${prep_stage[@]}; do
-    #     install_software $SOFTWR 
-    # done
+    echo -e "$CNT - Prep Stage - Installing needed components, this may take a while..."
+    for SOFTWR in ${prep_stage[@]}; do
+        install_software $SOFTWR 
+    done
 
     # Setup Nvidia if it was found
     if [[ "$ISNVIDIA" == true ]]; then
@@ -244,14 +204,22 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
     # Stage 1 - main components
     echo -e "$CNT - Installing main components, this may take a while..."
     for SOFTWR in ${install_stage[@]}; do
-        # install_software $SOFTWR
-        echo "installing $SOFTWR"
+        install_software $SOFTWR
+        # echo "installing $SOFTWR"
     done
 
-    # Start the bluetooth service
-    echo -e "$CNT - Starting the Bluetooth Service..."
-    sudo systemctl enable --now bluetooth.service &>> $INSTLOG
-    sleep 2
+    read -rep $'[\e[1;33mACTION\e[0m] - Would you like to install Bluetooth utilities? (y,n) ' INST
+    if [[ $INST == "Y" || $INST == "y" ]]; then
+        install_software bluez
+        install_software bluez-utils
+        install_software blueman
+
+        # Start the bluetooth service
+        echo -e "$CNT - Starting the Bluetooth Service..."
+        sudo systemctl enable --now bluetooth.service &>> $INSTLOG
+        sleep 2
+    fi
+
 
     # Enable the sddm login manager service
     echo -e "$CNT - Enabling the SDDM Service..."
@@ -268,25 +236,6 @@ read -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (y,n) '
 if [[ $CFG == "Y" || $CFG == "y" ]]; then
     echo -e "$CNT - Copying config files..."
 
-    # copy the HyprV directory
-    # cp -R dot_config ~/.config/
-
-    
-
-    #set the measuring unit
-    # echo -e "$CNT - Attempring to set mesuring unit..."
-    # if locale -a | grep -q ^en_US; then
-    #     echo -e "$COK - Setting mesuring system to imperial..."
-    #     ln -sf ~/.config/HyprV/waybar/conf/mesu-imp.jsonc ~/.config/HyprV/waybar/conf/mesu.jsonc
-    #     sed -i 's/SET_MESU=""/SET_MESU="I"/' ~/.config/HyprV/hyprv.conf
-    # else
-    #     echo -e "$COK - Setting mesuring system to metric..."
-    #     sed -i 's/SET_MESU=""/SET_MESU="M"/' ~/.config/HyprV/hyprv.conf
-    #     ln -sf ~/.config/HyprV/waybar/conf/mesu-met.jsonc ~/.config/HyprV/waybar/conf/mesu.jsonc
-    # fi
-
-    # Setup each appliaction
-    # check for existing config folders and backup
     path="dot_config/"
 
     file_configs=($(ls --group-directories-first $path))
@@ -297,32 +246,17 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
         newConfigPath="$path$config"
 
         if [ -e "$configPath" ]; then 
-            echo -e "$CAT - Config for $DIR located, backing up."
+            echo -e "$CAT - Config for $config located, backing up."
             mv $DIRPATH $DIRPATH-backup &>> $INSTLOG
-            echo -e "$COK - Backed up $DIR to $DIRPATH-backup."
+            echo -e "$COK - Backed up $config to $DIRPATH-backup."
         fi
 
-        # make new empty folders
-        # mkdir -p $DIRPATH &>> $INSTLOG
         if [ -d "$newConfigPath" ];then
-            cp -r "$newConfigPath" "~/.config/"
+            cp -r "$newConfigPath" ~/.config/
         else
-            cp "$newConfigPath" "~/.config/"
+            cp "$newConfigPath" ~/.config/
         fi
     done
-
-    # link up the config files
-    # echo -e "$CNT - Setting up the new config..." 
-    # cp ~/.config/HyprV/hypr/* ~/.config/hypr/
-    # ln -sf ~/.config/HyprV/kitty/kitty.conf ~/.config/kitty/kitty.conf
-    # ln -sf ~/.config/HyprV/mako/conf/config-dark ~/.config/mako/config
-    # ln -sf ~/.config/HyprV/swaylock/config ~/.config/swaylock/config
-    # ln -sf ~/.config/HyprV/waybar/conf/v4-config.jsonc ~/.config/waybar/config.jsonc
-    # ln -sf ~/.config/HyprV/waybar/style/v4-style-dark.css ~/.config/waybar/style.css
-    # ln -sf ~/.config/HyprV/wlogout/layout ~/.config/wlogout/layout
-    # ln -sf ~/.config/HyprV/wofi/config ~/.config/wofi/config
-    # ln -sf ~/.config/HyprV/wofi/style/v4-style-dark.css ~/.config/wofi/style.css
-
 
     # add the Nvidia env file to the config (if needed)
     if [[ "$ISNVIDIA" == true ]]; then
@@ -331,10 +265,10 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 
     # Copy the SDDM theme
     echo -e "$CNT - Setting up the login screen."
-    sudo cp -R sddm-Theme/sdt /usr/share/sddm/themes/
+    sudo cp -R sddm-theme/sdt /usr/share/sddm/themes/
     sudo chown -R $USER:$USER /usr/share/sddm/themes/sdt
     sudo mkdir /etc/sddm.conf.d
-    # echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>> $INSTLOG
+    echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>> $INSTLOG
 
     # WLDIR=/usr/share/wayland-sessions
     # if [ -d "$WLDIR" ]; then
@@ -348,9 +282,9 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     # sudo cp Extras/hyprland.desktop /usr/share/wayland-sessions/
 
     # setup the first look and feel as dark
-    # xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
+    xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
     # xfconf-query -c xsettings -p /Net/IconThemeName -s "Papirus-Dark"
-    # gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+    gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
     # gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
     # cp -f ~/.config/HyprV/backgrounds/v4-background-dark.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
 fi
