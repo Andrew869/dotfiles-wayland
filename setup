@@ -14,13 +14,17 @@ prep_stage=(
     qt5-graphicaleffects
     gtk3 
     polkit-gnome 
-    pipewire 
-    wireplumber 
     jq 
-    wl-clipboard 
-    cliphist 
+    wl-clipboard
     python-requests 
     pacman-contrib
+    playerctl
+    starship
+    pipewire
+    wireplumber
+    pipewire-audio
+    pipewire-alsa
+    pipewire-pulse
 )
 
 #software for nvidia GPU only
@@ -103,7 +107,7 @@ echo -e "$CNT - This script will run some commands that require sudo. You will b
 If you are worried about entering your password then you may want to review the content of the script."
 sleep 1
 
-give the user an option to exit out
+# give the user an option to exit out
 read -rep $'[\e[1;33mACTION\e[0m] - Would you like to continue with the install (y,n) ' CONTINST
 if [[ $CONTINST == "Y" || $CONTINST == "y" ]]; then
     echo -e "$CNT - Setup starting..."
@@ -247,8 +251,8 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 
         if [ -e "$configPath" ]; then 
             echo -e "$CAT - Config for $config located, backing up."
-            mv $DIRPATH $DIRPATH-backup &>> $INSTLOG
-            echo -e "$COK - Backed up $config to $DIRPATH-backup."
+            mv $configPath $configPath-backup &>> $INSTLOG
+            echo -e "$COK - Backed up $config to $configPath-backup."
         fi
 
         if [ -d "$newConfigPath" ];then

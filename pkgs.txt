@@ -28,7 +28,6 @@ nwg-look-bin
 pamixer
 pavucontrol
 pipes.sh
-pipewire
 ranger
 sddm-git
 slurp
@@ -40,13 +39,14 @@ swaylock-effects
 swww-git
 ttf-firacode-nerd
 ttf-jetbrains-mono-nerd
+udiskie
+udisks2
 unimatrix-git
 unzip
 vim
 visual-studio-code-bin
 waybar
 wf-recorder
-wireplumber
 wl-clipboard
 wlogout
 wofi

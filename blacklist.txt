@@ -6,6 +6,8 @@ linux-headers
 eww-wayland
 qt5ct
 polkit-kde-agent
+pipewire
+wireplumber
 pipewire-alsa
 pipewire-audio
 pipewire-pulse
