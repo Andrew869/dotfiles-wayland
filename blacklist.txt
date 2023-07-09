@@ -12,6 +12,7 @@ pipewire-alsa
 pipewire-audio
 pipewire-pulse
 obs-studio
+jq
 vlc
 glfw-wayland
 breeze-obsidian-cursor-theme
@@ -22,8 +23,9 @@ mpc
 mpd
 mpv
 networkmanager
-python-pillow
 python-pillowfight
 sddm-sugar-light
 socat
 wl-clip-persist-git
+yay
+lxappearance

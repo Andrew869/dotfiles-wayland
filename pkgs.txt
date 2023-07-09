@@ -14,11 +14,9 @@ grimblast-git
 grub
 hyprpicker-git
 imagemagick
-jq
 kitty
 libcaca
 libnotify
-lxappearance
 neofetch
 neovim
 noto-fonts
@@ -28,6 +26,7 @@ nwg-look-bin
 pamixer
 pavucontrol
 pipes.sh
+python-pillow
 ranger
 sddm-git
 slurp
@@ -53,5 +52,4 @@ wofi
 xdg-desktop-portal-hyprland
 xdg-user-dirs
 xfce4-settings
-yay
 zip

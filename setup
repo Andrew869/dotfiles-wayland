@@ -274,6 +274,20 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     sudo mkdir /etc/sddm.conf.d
     echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>> $INSTLOG
 
+    # Spotify theme configuration
+    git clone --depth=1 https://github.com/spicetify/spicetify-themes.git
+    cd spicetify-themes
+    cp -r Ziro ~/.config/spicetify/Themes
+
+    spicetify config current_theme Ziro
+    spicetify config color_scheme rose-pine-dawn
+
+    sudo chmod a+wr /opt/spotify
+    sudo chmod a+wr /opt/spotify/Apps -R
+
+    spicetify backup apply
+    spicetify apply
+
     # WLDIR=/usr/share/wayland-sessions
     # if [ -d "$WLDIR" ]; then
     #     echo -e "$COK - $WLDIR found"
@@ -287,10 +301,11 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 
     # setup the first look and feel as dark
     xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
-    # xfconf-query -c xsettings -p /Net/IconThemeName -s "Papirus-Dark"
+
     gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
-    # gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
-    # cp -f ~/.config/HyprV/backgrounds/v4-background-dark.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
+    gsettings set org.gnome.desktop.interface cursor-theme "Breeze_Snow"
+    
+    sudo echo -e "[icon theme]\nInherits=Breeze_Snow" > /usr/share/icons/default/index.theme
 fi
 
 ### Install the starship shell ###
@@ -305,36 +320,6 @@ if [[ $STAR == "Y" || $STAR == "y" ]]; then
     echo -e "$CNT - copying starship config file to ~/.config ..."
     # cp dot_config/starship.toml ~/.config/
 fi
-
-### Install software for Asus ROG laptops ###
-# read -rep $'[\e[1;33mACTION\e[0m] - For ASUS ROG Laptops - Would you like to install Asus ROG software support? (y,n) ' ROG
-# if [[ $ROG == "Y" || $ROG == "y" ]]; then
-#     echo -e "$CNT - Adding Keys..."
-#     sudo pacman-key --recv-keys 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35 &>> $INSTLOG
-#     sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35 &>> $INSTLOG
-#     sudo pacman-key --lsign-key 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35 &>> $INSTLOG
-#     sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35 &>> $INSTLOG
-
-#     LOC="/etc/pacman.conf"
-#     echo -e "$CNT - Updating $LOC with g14 repo."
-#     echo -e "\n[g14]\nServer = https://arch.asus-linux.org" | sudo tee -a $LOC &>> $INSTLOG
-#     echo -e "$CNT - Update the system..."
-#     sudo pacman -Suy --noconfirm &>> $INSTLOG
-
-#     echo -e "$CNT - Installing ROG pacakges..."
-#     install_software asusctl
-#     install_software supergfxctl
-#     install_software rog-control-center
-
-#     echo -e "$CNT - Activating ROG services..."
-#     sudo systemctl enable --now power-profiles-daemon.service &>> $INSTLOG
-#     sleep 2
-#     sudo systemctl enable --now supergfxd &>> $INSTLOG
-#     sleep 2
-
-#     # add the ROG keybinding file to the config
-#     echo -e "\nsource = ~/.config/hypr/rog-g15-strix-2021-binds.conf" >> ~/.config/hypr/hyprland.conf
-# fi
 
 ### Script is done ###
 echo -e "$CNT - Script had completed!"
