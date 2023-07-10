@@ -274,20 +274,6 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     sudo mkdir /etc/sddm.conf.d
     echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>> $INSTLOG
 
-    # Spotify theme configuration
-    git clone --depth=1 https://github.com/spicetify/spicetify-themes.git
-    cd spicetify-themes
-    cp -r Ziro ~/.config/spicetify/Themes
-
-    spicetify config current_theme Ziro
-    spicetify config color_scheme rose-pine-dawn
-
-    sudo chmod a+wr /opt/spotify
-    sudo chmod a+wr /opt/spotify/Apps -R
-
-    spicetify backup apply
-    spicetify apply
-
     # WLDIR=/usr/share/wayland-sessions
     # if [ -d "$WLDIR" ]; then
     #     echo -e "$COK - $WLDIR found"
@@ -305,7 +291,7 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
     gsettings set org.gnome.desktop.interface cursor-theme "Breeze_Snow"
     
-    sudo echo -e "[icon theme]\nInherits=Breeze_Snow" > /usr/share/icons/default/index.theme
+    sudo sed -i 's/Inherits=Adwaita/Inherits=Breeze_Snow/' /usr/share/icons/default/index.theme
 fi
 
 ### Install the starship shell ###

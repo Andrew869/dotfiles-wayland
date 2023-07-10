@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ ! -e ~/.config/spotify ];then
+    echo "Run this script after opening Spotify at least once"
+else
+    # Spotify theme configuration
+    git clone --depth=1 https://github.com/spicetify/spicetify-themes.git
+    cd spicetify-themes
+    cp -r Ziro ~/.config/spicetify/Themes
+
+    spicetify config current_theme Ziro
+    spicetify config color_scheme rose-pine-dawn
+
+    sudo chmod a+wr /opt/spotify
+    sudo chmod a+wr /opt/spotify/Apps -R
+
+    spicetify backup apply
+    spicetify apply
+fi

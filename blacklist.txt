@@ -28,4 +28,5 @@ sddm-sugar-light
 socat
 wl-clip-persist-git
 yay
-lxappearance
+git
+grub

@@ -8,15 +8,14 @@ dunst
 feh
 firefox
 fzf
-git
 grim
 grimblast-git
-grub
 hyprpicker-git
 imagemagick
 kitty
 libcaca
 libnotify
+lxappearance
 neofetch
 neovim
 noto-fonts
