@@ -13,14 +13,14 @@ window#waybar {
 }
 
 tooltip{
-    /* background-color: #f4d9e1; */
+    background-color: #282828;
     border: 1px double #9e9e9e;
-    border-radius: 20px;
+    border-radius: 16px;
 }
 
 #workspaces {
 	background: #282828;
-    border: 1px double #9e9e9e;
+    /* border: 1px double #9e9e9e; */
 	margin: 3px 5px 3px 5px;
     padding: 0px 5px 0px 5px;
 	border-radius: 16px;
@@ -47,7 +47,7 @@ tooltip{
 #custom-current-player {
     background-color: #282828;
     border-radius: 16px;
-    border: 1px double #9e9e9e;
+    /* border: 1px double #9e9e9e; */
     margin: 3px 0px;
     padding: 0 8px
 }
@@ -94,15 +94,16 @@ tooltip{
 }
 #cpu, #memory, #disk{
     background-color: #282828;
-    border: 1px double #9e9e9e;
+    /* border: 1px double #9e9e9e; */
     margin-top: 3px;
     margin-bottom: 3px;
-    padding: 0px 10px 0px 10px;
+    /* padding: 0px 10px 0px 10px; */
     font-weight: bold;
 }
 #cpu {
     margin-left: 5px;
     border-radius: 16px 0px 0px 16px;
+    border-right: 1px double #9e9e9e;
 }
 #memory {
     border-radius: 0px 16px 16px 0px;
@@ -112,18 +113,24 @@ tooltip{
     border-radius: 16px;
 }
 
-#tray, #language, #network{
+#tray, #language, #network {
     /* background: transparent; */
     background-color: #282828;
-    border: 1px double #9e9e9e;
+    /* border: 1px double #9e9e9e; */
     border-radius: 16px;
 	padding: 0px 6px;
 	margin-top: 3px;
 	margin-bottom: 3px;
     margin-left: 5px;
 }
-#network.wifi, #network.disconnected{
+#network.wifi, #network.disconnected, #network.disabled {
     padding-right: 11px;
+}
+#network.disabled {
+    color: #fffac2;
+}
+#network.disconnected {
+    color: #db4b4b;
 }
 #network.ethernet {
     padding-right: 10px;
@@ -131,7 +138,7 @@ tooltip{
 #battery, #backlight, #pulseaudio{
 	/* background: transparent; */
     background-color: #282828;
-    border: 1px double #9e9e9e;
+    /* border: 1px double #9e9e9e; */
     border-radius: 16px;
 	/* padding: 5px 5px 5px 5px; */
 	margin-top: 3px;
@@ -142,20 +149,16 @@ tooltip{
     color: #9ece6a;
 }
 #battery.warning:not(.charging) {
-    background-color: #f7768e;
-    color: #24283b;
-    border-radius: 5px 5px 5px 5px;
+    color: #fffac2;
 }
-#backlight {
+#battery.critical:not(.charging) {
     color: #db4b4b;
-    border-radius: 0px 0px 0px 0px;
-    margin: 5px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding: 0px 0px;
 }
+/* #backlight {
+
+} */
 #pulseaudio.muted{
-    background: #db4b4b;
+    color: #db4b4b;
     /* border-radius: 5px;
     margin: 5px 0px 5px 5px; */
 }

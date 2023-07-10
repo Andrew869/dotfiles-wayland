@@ -84,12 +84,14 @@
 	"cpu": {
 		"format": "󰻠 {usage}%",
 		"format-alt": "󰻠 {avg_frequency} GHz",
-		"interval": 5
+		"min-length": 7,
+		"max-length": 7
 	},
 	"memory": {
 		"format": "󰍛 {}%",
 		"format-alt": "󰍛 {used}/{total} GiB",
-		"interval": 5
+		"min-length": 7,
+		"max-length": 7
 	},
 	"disk": {
 		"format": "󰋊 {used}%",
@@ -110,7 +112,8 @@
 	"network": {
 		"format-wifi": "󰖩",
 		"format-ethernet": "󰈀",
-		"format-disconnected": "󰖪",
+		"format-disconnected": "󰤭",
+		"format-disabled": "󰤦",
 		"tooltip-format-wifi": "{essid}: {ipaddr}/{cidr} - 󰖩 ({signalStrength}%)",
 		"tooltip-format-ethernet": "󰈀 {ifname}: {ipaddr}/{cidr}",
     	"tooltip-format-disconnected": "Disconnected"
@@ -123,17 +126,26 @@
 			"warning": 20,
             "critical": 10
         },
-        "format":"{icon}  {capacity}%",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{icon} {time}",
+		"interval": 10,
+        "format":"{icon} {capacity}%",
+		"format-discharging": "{icon} {capacity}%",
+        "format-charging": "{icon} {capacity}%",
+        "format-plugged": " {capacity}%",
+        // "format-alt": "{icon} {time}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+		"min-length": 7,
+		"max-length": 7,
+        "format-icons": {
+			"default":["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+			"charging":["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
+		}
 	},
 	"backlight": {
 		// "device": "acpi_video1",
 		"format": "{icon} {percent}%",
+		"min-length": 7,
+		"max-length": 7,
 		"format-icons": ["", "", "", "", "", "", "", "", ""]
 		//	"on-scroll-up":,
 		//	"on-scroll-down":,
