@@ -27,6 +27,7 @@ pavucontrol
 pipes.sh
 python-pillow
 ranger
+trash-cli
 sddm-git
 slurp
 spicetify-cli

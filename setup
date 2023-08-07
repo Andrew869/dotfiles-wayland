@@ -25,6 +25,9 @@ prep_stage=(
     pipewire-audio
     pipewire-alsa
     pipewire-pulse
+    zsh
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 #software for nvidia GPU only
@@ -168,8 +171,6 @@ if [ ! -f /sbin/yay ]; then
     fi
 fi
 
-
-
 ### Install all of the above pacakges ####
 read -rep $'[\e[1;33mACTION\e[0m] - Would you like to install the packages? (y,n) ' INST
 if [[ $INST == "Y" || $INST == "y" ]]; then
@@ -274,6 +275,9 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     sudo mkdir /etc/sddm.conf.d
     echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>> $INSTLOG
 
+    echo -e 'ZDOTDIR="$HOME/.config/zsh"' >> ~/.zshenv
+    chmod a+x ~/.zshenv
+
     # WLDIR=/usr/share/wayland-sessions
     # if [ -d "$WLDIR" ]; then
     #     echo -e "$COK - $WLDIR found"
@@ -295,17 +299,17 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 fi
 
 ### Install the starship shell ###
-read -rep $'[\e[1;33mACTION\e[0m] - Would you like to activate the starship shell? (y,n) ' STAR
-if [[ $STAR == "Y" || $STAR == "y" ]]; then
-    # install the starship shell
-    echo -e "$CNT - Hansen Crusher, Engage!"
-    echo -e "$CNT - Updating .bashrc..."
-    echo -e '\nexport EDITOR=nvim' >> ~/.bashrc
-    echo -e '\nexport VISUAL=nvim' >> ~/.bashrc
-    echo -e '\neval "$(starship init bash)"' >> ~/.bashrc
-    echo -e "$CNT - copying starship config file to ~/.config ..."
-    # cp dot_config/starship.toml ~/.config/
-fi
+# read -rep $'[\e[1;33mACTION\e[0m] - Would you like to activate the starship shell? (y,n) ' STAR
+# if [[ $STAR == "Y" || $STAR == "y" ]]; then
+#     # install the starship shell
+#     echo -e "$CNT - Hansen Crusher, Engage!"
+#     echo -e "$CNT - Updating .bashrc..."
+#     echo -e '\nexport EDITOR=nvim' >> ~/.bashrc
+#     echo -e '\nexport VISUAL=nvim' >> ~/.bashrc
+#     echo -e '\neval "$(starship init bash)"' >> ~/.bashrc
+#     echo -e "$CNT - copying starship config file to ~/.config ..."
+#     # cp dot_config/starship.toml ~/.config/
+# fi
 
 ### Script is done ###
 echo -e "$CNT - Script had completed!"
