@@ -8,7 +8,7 @@
     "margin-right": 0,
     "modules-left": ["wlr/workspaces", "custom/current-player", "custom/playerlabel"],
     "modules-center": ["wlr/taskbar", "cpu", "memory"],
-    "modules-right": ["tray", "hyprland/language", "network", "battery","backlight","pulseaudio", "clock"],
+    "modules-right": ["tray", "hyprland/language", "network", "bluetooth", "battery","backlight","pulseaudio", "clock"],
     
 // Modules configuration
 
@@ -106,8 +106,7 @@
 	},
 	"hyprland/language": {
 		"format": "{short}",
-		"tooltip-format": "asd",
-		"on-click": "hyprctl switchxkblayout kingston-hyperx-alloy-fps-pro-mechanical-gaming-keyboard next"
+		"on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
 	},
 	"network": {
 		"format-wifi": "󰖩",
@@ -120,6 +119,16 @@
 		// "tooltip-format": "{essid}"
 		// "on-click-right": "nm-connection-editor"
 	},
+	"bluetooth": {
+	    "format": " {status}",
+	    "format-disabled": "", // an empty format will hide the module
+	    "format-connected": " {num_connections}",
+	    "on-click-right": "bluetoothctl power off",
+	    "on-click": "bluetoothctl power on",
+	    "tooltip-format": "{device_alias}",
+	    "tooltip-format-connected": " {device_enumerate}",
+	    "tooltip-format-enumerate-connected": "{device_alias}"
+    },
 	"battery": {
         "states": {
             "good": 95,
@@ -144,6 +153,7 @@
 	"backlight": {
 		// "device": "acpi_video1",
 		"format": "{icon} {percent}%",
+		"tooltip": false,
 		"min-length": 7,
 		"max-length": 7,
 		"format-icons": ["", "", "", "", "", "", "", "", ""]
@@ -161,7 +171,7 @@
 		"on-scroll-up": "bash ~/.config/dunst/scripts/volume up &",
 		"on-scroll-down": "bash ~/.config/dunst/scripts/volume down &",
 		"scroll-step": 5,
-		"on-click-right": "pavucontrol",
+		"on-click-right": "killall pavucontrol || pavucontrol",
 		"format-icons": {
 			"headphone": "",
 			"hands-free": "",

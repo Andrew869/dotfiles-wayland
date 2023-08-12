@@ -113,7 +113,7 @@ tooltip{
     border-radius: 16px;
 }
 
-#tray, #language, #network {
+#tray, #language, #network, #bluetooth {
     /* background: transparent; */
     background-color: #282828;
     /* border: 1px double #9e9e9e; */
@@ -163,14 +163,15 @@ tooltip{
     margin: 5px 0px 5px 5px; */
 }
 #clock {
-    color: #E6B9C6;
+    /* color: #E6B9C6; */
+    color: #f4d9e1;
     background-color: #282828;
     border-radius: 0px 0px 0px 16px;
     padding-left: 10px;
     padding-right: 5px;
     margin-left: 5px;
     font-weight: bold;
-    border-left: 1px double #9e9e9e;
+    /* border-left: 1px double #9e9e9e; */
 }
 
 
