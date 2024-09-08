@@ -61,6 +61,13 @@ button:focus {
     background-image: image(url("./sleep-hover.png"));
 }
 
+#hibernate {
+    background-image: image(url("./sleep.png"));
+}
+#hibernate:focus {
+    background-image: image(url("./sleep-hover.png"));
+}
+
 #shutdown {
     background-image: image(url("./power.png"));
 }

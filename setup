@@ -296,6 +296,8 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     gsettings set org.gnome.desktop.interface cursor-theme "Breeze_Snow"
     
     sudo sed -i 's/Inherits=Adwaita/Inherits=Breeze_Snow/' /usr/share/icons/default/index.theme
+
+    git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons &>> $INSTLOG
 fi
 
 ### Install the starship shell ###

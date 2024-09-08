@@ -25,6 +25,6 @@
 }
 {
     "label" : "suspend",
-    "action" : "systemctl suspend",
+    "action" : "systemctl suspend && swaylock",
     "text" : "Suspend",
 }

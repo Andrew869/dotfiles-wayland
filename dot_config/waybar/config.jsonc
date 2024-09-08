@@ -6,13 +6,13 @@
     "margin-bottom": 0,
     "margin-left": 0,
     "margin-right": 0,
-    "modules-left": ["wlr/workspaces", "custom/current-player", "custom/playerlabel"],
+    "modules-left": ["hyprland/workspaces", "custom/current-player", "custom/playerlabel"],
     "modules-center": ["wlr/taskbar", "cpu", "memory"],
     "modules-right": ["tray", "hyprland/language", "network", "bluetooth", "battery","backlight","pulseaudio", "clock"],
     
 // Modules configuration
 
-	"wlr/workspaces": {
+	"hyprland/workspaces": {
 		"active-only": false,
 		"all-outputs": true,
 		"disable-scroll": false,
@@ -29,8 +29,8 @@
 			"6": "六",
 			// "urgent": "",
 			// "active": "",
-				// "default": "󰧞",
-				"sort-by-number": true
+			// "default": "󰧞",
+			"sort-by-number": true
 			}
     },
 	// 	"custom/playerctl-prev": {
@@ -74,12 +74,15 @@
         "icon-size": 16,
         "all-outputs": false,
 		"active-first": false,
-        "tooltip-format": "{title}",
+        "tooltip-format": "{name}",
         "on-click": "activate",
         "on-click-middle": "close",
         "ignore-list": [
-			"wofi"
-		]
+			"wofi", "DFIELD", "rofi", "onedrive_tray"
+		],
+		"rewrite": {
+        	".*Firefox.*": "Firefox"
+    	}
     },
 	"cpu": {
 		"format": "󰻠 {usage}%",
@@ -99,33 +102,36 @@
 		"interval": 30,
 		"path": "/home/andrew/Downloads"
 	},
-
 	"tray": {
 		"icon-size": 16,
 		"spacing": 6
 	},
 	"hyprland/language": {
 		"format": "{short}",
-		"on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
+		"on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next",
+		"keyboard-name": "at-translated-set-2-keyboard"
 	},
 	"network": {
-		"format-wifi": "󰖩",
+		"format-wifi": "󰤥",
 		"format-ethernet": "󰈀",
 		"format-disconnected": "󰤭",
 		"format-disabled": "󰤦",
 		"tooltip-format-wifi": "{essid}: {ipaddr}/{cidr} - 󰖩 ({signalStrength}%)",
 		"tooltip-format-ethernet": "󰈀 {ifname}: {ipaddr}/{cidr}",
-    	"tooltip-format-disconnected": "Disconnected"
+    	"tooltip-format-disconnected": "Disconnected",
 		// "tooltip-format": "{essid}"
-		// "on-click-right": "nm-connection-editor"
+		"on-click": "killall nm-applet || nm-applet"
+		// "on-click-right": "killall nm-applet"
 	},
 	"bluetooth": {
-	    "format": " {status}",
-	    "format-disabled": "", // an empty format will hide the module
-	    "format-connected": " {num_connections}",
-	    "on-click-right": "bluetoothctl power off",
-	    "on-click": "bluetoothctl power on",
-	    "tooltip-format": "{device_alias}",
+	    // "format": " {status}",
+		"format-on": "",
+		"format-off": "󰂲",
+	    "format-disabled": "󰂲", // an empty format will hide the module
+	    "format-connected": "󰂰 {num_connections}",
+	    "on-click-right": "blueman-manager",
+	    "on-click": "bluetoothctl power off",
+	    "tooltip-format": "{status}",
 	    "tooltip-format-connected": " {device_enumerate}",
 	    "tooltip-format-enumerate-connected": "{device_alias}"
     },
@@ -143,8 +149,8 @@
         // "format-alt": "{icon} {time}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-		"min-length": 7,
-		"max-length": 7,
+		// "min-length": 7,
+		// "max-length": 7,
         "format-icons": {
 			"default":["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
 			"charging":["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
@@ -154,19 +160,19 @@
 		// "device": "acpi_video1",
 		"format": "{icon} {percent}%",
 		"tooltip": false,
-		"min-length": 7,
-		"max-length": 7,
+		// "min-length": 7,
+		// "max-length": 7,
 		"format-icons": ["", "", "", "", "", "", "", "", ""]
 		//	"on-scroll-up":,
 		//	"on-scroll-down":,
 	},
 	"pulseaudio": {
-		"format": "{icon} {volume}%",
+		"format": "{icon}  {volume}%",
 		"format-bluetooth": "{icon} {volume}% ",
 		"format-muted": "󰝟",
 		"tooltip": false,
-		"min-length": 7,
-		"max-length": 7,
+		// "min-length": 7,
+		// "max-length": 7,
 		"on-click": "bash ~/.config/dunst/scripts/volume mute &",
 		"on-scroll-up": "bash ~/.config/dunst/scripts/volume up &",
 		"on-scroll-down": "bash ~/.config/dunst/scripts/volume down &",

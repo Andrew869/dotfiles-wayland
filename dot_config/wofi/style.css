@@ -22,7 +22,6 @@ window {
   all: unset;
   min-height: 36px;
   padding: 4px 10px;
-  margin: 4px;
   border: none;
   color: #ffffff;
   font-weight: bold;
@@ -54,6 +53,10 @@ window {
   margin-bottom: 5px;
 }
 
+#text {
+  padding-left: 15px;
+}
+
 #text:selected {
   color: #14151e;
   margin: 0px 0px;
@@ -62,16 +65,17 @@ window {
 }
 
 #entry {
-  margin: 0px 0px;
+  /* margin: 0px 0px; */
   border: none;
   border-radius: 15px;
   background-color: transparent;
+  padding-left: 20px;
 }
 
 #entry:selected {
   margin: 0px 0px;
   border: none;
+  outline: none;
   border-radius: 15px;
-  background: linear-gradient(90deg, #99e6bf 0%, #b6d8e2 100%);
+  background: linear-gradient(90deg, #ffb0c8 0%, #fae9ee 100%);
 }
-

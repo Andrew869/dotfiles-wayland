@@ -78,6 +78,9 @@ tooltip{
     font-size: 16px;
 }
 
+#taskbar {
+    margin-right: 1px;
+}
 #taskbar button {
     /* background-color: #282828; */
     border-radius: 16px;
@@ -89,8 +92,9 @@ tooltip{
     background-color: #282828;
     border-radius: 16px;
     border: 1px double #9e9e9e;
-    margin-top: 3px;
-	margin-bottom: 3px;
+    margin: 2px -1px 2px -1px;
+    /* margin-top: 2px;
+	margin-bottom: 2px; */
 }
 #cpu, #memory, #disk{
     background-color: #282828;
@@ -124,7 +128,7 @@ tooltip{
     margin-left: 5px;
 }
 #network.wifi, #network.disconnected, #network.disabled {
-    padding-right: 11px;
+    padding-right: 12px;
 }
 #network.disabled {
     color: #fffac2;
@@ -135,12 +139,19 @@ tooltip{
 #network.ethernet {
     padding-right: 10px;
 }
+#bluetooth {
+    padding-right: 8px;
+}
+#bluetooth.on {
+    color: #9ece6a;
+}
 #battery, #backlight, #pulseaudio{
 	/* background: transparent; */
     background-color: #282828;
     /* border: 1px double #9e9e9e; */
     border-radius: 16px;
 	/* padding: 5px 5px 5px 5px; */
+    padding: 0px 8px;
 	margin-top: 3px;
 	margin-bottom: 3px;
     margin-left: 5px;

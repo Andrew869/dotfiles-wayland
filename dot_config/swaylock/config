@@ -1,13 +1,17 @@
 # https://github.com/mortie/swaylock-effects/blob/master/swaylock.1.scd
 
 # general
-fade-in=0.3
+# fade-in=0.3
 effect-blur=5x5
+# effect-greyscale
 show-failed-attempts
 ignore-empty-password
 clock
 datestr=%A %B %d
 daemonize
+# image=/usr/share/sddm/themes/sdt/Background.png
+indicator-caps-lock
+hide-keyboard-layout
 
 layout-bg-color=00000000
 
