@@ -7,8 +7,8 @@
     "margin-left": 0,
     "margin-right": 0,
     "modules-left": ["hyprland/workspaces", "custom/current-player", "custom/playerlabel"],
-    "modules-center": ["wlr/taskbar", "cpu", "memory"],
-    "modules-right": ["tray", "hyprland/language", "network", "bluetooth", "battery","backlight","pulseaudio", "clock"],
+    "modules-center": ["wlr/taskbar"],
+    "modules-right": ["tray", "hyprland/language", "network", "battery","backlight","pulseaudio", "clock", "custom/panel"],
     
 // Modules configuration
 
@@ -21,16 +21,9 @@
 		"format": "{icon}",
 		"on-click": "activate",
 		"format-icons": {
-			"1": "一",
-			"2": "二",
-			"3": "三",
-			"4": "四",
-			"5": "五",
-			"6": "六",
 			// "urgent": "",
 			// "active": "",
-			// "default": "󰧞",
-			"sort-by-number": true
+			// "default": "󰧞"
 			}
     },
 	// 	"custom/playerctl-prev": {
@@ -191,8 +184,23 @@
 	"clock": {
 		"format": " {:%d/%m  %H:%M}",
 		"tooltip": "true",
-		"tooltip-format": "<tt><small>{calendar}</small></tt>"
+		"tooltip-format": "<span>{calendar}</span>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "weekdays": "<span color='#01FEFD'><b>{}</b></span>",
+                "today": "<span color='#0088CC'><b>{}</b></span>"
+            }
+        }
 		// "format-alt": " {:%d/%m}"
+	},
+	"custom/panel": {
+		"format": "󰍥",
+		"on-click": "swaync-client -t"
 	}
 
 	// "hyprland/window": {

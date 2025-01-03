@@ -1,0 +1,10 @@
+resources
+fastfetch
+hypr
+kitty
+nvim
+ranger
+rofi
+swaync
+waybar
+wlogout

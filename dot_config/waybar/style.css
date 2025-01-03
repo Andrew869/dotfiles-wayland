@@ -8,14 +8,16 @@
 }
 
 window#waybar {
-    background: rgba(30, 30, 46, 0.5);
-    color: #f4d9e1
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
 }
 
 tooltip{
+    background-color: black;
     background-color: #282828;
-    border: 1px double #9e9e9e;
-    border-radius: 16px;
+    border: 1px solid #9e9e9e;
+    border-radius: 3px;
+    
 }
 
 #workspaces {
@@ -34,7 +36,7 @@ tooltip{
     color: #928374;
 }
 #workspaces button.active {
-    color: #f4d9e1;
+    color: #ffffff;
     /* background-color: transparent; */
     border-radius: 16px;
     font-weight: bold; 
@@ -79,22 +81,17 @@ tooltip{
 }
 
 #taskbar {
-    margin-right: 1px;
+    /* margin-right: 1px; */
 }
 #taskbar button {
     /* background-color: #282828; */
-    border-radius: 16px;
-    /* border: 1px double #fff; */
-    margin-top: 3px;
-	margin-bottom: 3px;
+    border-radius: 6px;
+    margin: 3px 0;
 }
 #taskbar button.active {
     background-color: #282828;
-    border-radius: 16px;
-    border: 1px double #9e9e9e;
-    margin: 2px -1px 2px -1px;
-    /* margin-top: 2px;
-	margin-bottom: 2px; */
+    border-radius: 6px;
+    margin: 3px 0;
 }
 #cpu, #memory, #disk{
     background-color: #282828;
@@ -119,7 +116,7 @@ tooltip{
 
 #tray, #language, #network, #bluetooth {
     /* background: transparent; */
-    background-color: #282828;
+    /* background-color: #282828; */
     /* border: 1px double #9e9e9e; */
     border-radius: 16px;
 	padding: 0px 6px;
@@ -147,7 +144,7 @@ tooltip{
 }
 #battery, #backlight, #pulseaudio{
 	/* background: transparent; */
-    background-color: #282828;
+    /* background-color: #282828; */
     /* border: 1px double #9e9e9e; */
     border-radius: 16px;
 	/* padding: 5px 5px 5px 5px; */
@@ -174,15 +171,15 @@ tooltip{
     margin: 5px 0px 5px 5px; */
 }
 #clock {
-    /* color: #E6B9C6; */
-    color: #f4d9e1;
     background-color: #282828;
-    border-radius: 0px 0px 0px 16px;
-    padding-left: 10px;
-    padding-right: 5px;
-    margin-left: 5px;
-    font-weight: bold;
-    /* border-left: 1px double #9e9e9e; */
+    margin: 3px 5px 3px 5px;
+    padding: 0px 10px;
+	border-radius: 16px;
+}
+
+#custom-panel {
+    padding: 0 10px;
+    background-color: rgba(0, 0, 0, 0.192);
 }
 
 

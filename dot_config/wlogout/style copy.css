@@ -15,32 +15,29 @@ window {
 }
 
 button {
-    color: white;
-    background-color: rgba(0, 0, 0, 0);
-    outline-style: none;
-    border: none;
-    border-width: 0px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 20%;
-    border-radius: 0px;
-    box-shadow: none;
+    border: none;
+    color: #ced7f4;
     text-shadow: none;
-    animation: gradient_f 20s ease-in infinite;
-}
-
-button:focus {
-    background-color: #01FEFD;
-    background-size: 30%;
+    background-color: rgba(30, 30, 46, 0);
+    margin: 5px;
+    transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    /* width: 50%; */
 }
 
 button:hover {
-    background-color: #2A43AA;
-    background-size: 40%;
-    border-radius: 8px;
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
-    margin : 40px 0px 40px 0px;
+    background-color: rgba(49, 50, 68, 0.1);
+    outline-style: none;
+}
+
+button:focus {
+    /* background-color: #7aa7f2; */
+    background-color: #F272AE;
+    color: #18182a;
+    text-shadow: none;
+    outline-style: none;
 }
 
 #lock {
