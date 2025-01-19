@@ -1,0 +1,4 @@
+
+[Default Applications]
+application/x-ndjson=nvim.desktop
+application/json=nvim.desktop

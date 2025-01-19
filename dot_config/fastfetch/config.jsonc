@@ -1,116 +1,105 @@
+//   _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+//  |   __|  _  |   __|_   _|   __|   __|_   _|     |  |  |
+//  |   __|     |__   | | | |   __|   __| | | |   --|     |
+//  |__|  |__|__|_____| |_| |__|  |_____| |_| |_____|__|__|  HYPRLAND
+//
+//  by Bina
 {
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-  "logo": {
-    "type": "kitty-direct",
-    "source": "~/.config/fastfetch/eldritch.png",
-    "padding": {
-      "right": 10,
-      "top": 6
-    }
-  },
-  "general": {
-    "multithreading": true
-  },
-  "display": {
-    "separator": "➜   "
-  },
-  "modules": [
-    "break",
-    {
-      "type": "title",
-      "format": "                                {6}{7}{8}"
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "/home/andrew/.config/resources/hypr.png",
+        "type": "kitty",
+        "height": 18,
+        "padding": {
+            "top": 2
+        }
     },
-    "break",
-    {
-      "type": "custom",
-      "format": "┌──────────────────────────────────────────────────────────────────────────────┐" // `\u001b` is `\033`, or `\e`
+        "general": {
+        "multithreading": true
     },
-    "break",
-    {
-      "key": "     OS           ",
-      "keyColor": "green",
-      "type": "os"
+    "display": {
+        "separator": " "
     },
-    {
-      "key": "    󰌢 Machine      ",
-      "keyColor": "cyan",
-      "type": "host"
-    },
-    {
-      "key": "     Kernel       ",
-      "keyColor": "blue",
-      "type": "kernel"
-    },
-    {
-      "key": "    󰅐 Uptime       ",
-      "keyColor": "green",
-      "type": "uptime"
-    },
-    {
-      "key": "     Packages     ",
-      "keyColor": "cyan",
-      "type": "packages"
-    },
-    {
-      "key": "     WM           ",
-      "keyColor": "blue",
-      "type": "wm"
-    },
-    {
-      "key": "     Shell        ",
-      "keyColor": "green",
-      "type": "shell"
-    },
-    {
-      "key": "     Terminal     ",
-      "keyColor": "cyan",
-      "type": "terminal"
-    },
-    {
-      "key": "     Font         ",
-      "keyColor": "blue",
-      "type": "terminalfont"
-    },
-    {
-      "key": "    󰻠 CPU          ",
-      "keyColor": "green",
-      "type": "cpu"
-    },
-    {
-      "key": "    󰍛 GPU          ",
-      "keyColor": "cyan",
-      "type": "gpu"
-    },
-    {
-      "key": "    󰑭 Memory       ",
-      "keyColor": "blue",
-      "type": "memory"
-    },
-    {
-      "key": "     Wifi         ",
-      "keyColor": "green",
-      "type": "wifi"
-    },
-    {
-      "key": "    󰩟 Local IP     ",
-      "keyColor": "cyan",
-      "type": "localip",
-      "compact": true
-    },
-    "break",
-    {
-      "type": "custom",
-      "format": "└──────────────────────────────────────────────────────────────────────────────┘" // `\u001b` is `\033`, or `\e`
-    },
-    "break",
-    {
-      "type": "colors",
-      "paddingLeft": 34,
-      "symbol": "circle",
-      "block": {
-        "width": 10
-      }
-    }
-  ]
+    "modules": [
+        "break",
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[90m  \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m "
+        },
+        "break",
+        {
+            "type": "title",
+            "keyWidth": 10
+        },
+        "break",
+        {
+            "type": "os",
+            "key": " ",
+            "keyColor": "34" // = color4
+        },
+        {
+            "type": "kernel",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "packages",
+            "format": "{} (pacman)",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "shell",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "terminal",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "wm",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "theme",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "terminalfont",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "cpu",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "gpu",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "memory",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "uptime",
+            "key": " ",
+            "keyColor": "34"
+        },
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[90m  \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m "
+        },
+        "break",
+        "break",
+    ]
 }
-

@@ -1,10 +1,11 @@
-resources
 fastfetch
 hypr
 kitty
 nvim
 ranger
+resources
 rofi
 swaync
 waybar
 wlogout
+mimeapps.list

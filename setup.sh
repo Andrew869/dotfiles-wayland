@@ -16,9 +16,6 @@ prep_stage=(
     gtk3
     polkit-gnome 
     jq
-    rsync
-    #python-requests 
-    #pacman-contrib
     brightnessctl
     playerctl
     pipewire
@@ -257,42 +254,41 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
             cp "$newConfigPath" ~/.config/
         fi
     done
+    
+    # ranger icons
+    mkdir -p ~/.config/ranger/plugins && git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons &>> $INSTLOG
 
     # add the Nvidia env file to the config (if needed)
     if [[ "$ISNVIDIA" == true ]]; then
         echo -e "\nsource = ~/.config/hypr/env_var_nvidia.conf" >> ~/.config/hypr/env.conf
     fi
 
+
+    # Theme config
+
     # Copy the SDDM theme
     echo -e "$CNT - Setting up the login screen."
-    sudo cp -R sddm-theme/sdt /usr/share/sddm/themes/
-    sudo chown -R $USER:$USER /usr/share/sddm/themes/sdt
-    sudo mkdir /etc/sddm.conf.d
-    echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>> $INSTLOG
+    sudo cp -R theme_config/candy /usr/share/sddm/themes/
+    sudo chown -R $USER:$USER /usr/share/sddm/themes/candy
+    sudo mkdir -p /etc/sddm.conf.d
+    echo -e "[Theme]\nCurrent=candy" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>> $INSTLOG
 
-
-    # WLDIR=/usr/share/wayland-sessions
-    # if [ -d "$WLDIR" ]; then
-    #     echo -e "$COK - $WLDIR found"
-    # else
-    #     echo -e "$CWR - $WLDIR NOT found, creating..."
-    #     sudo mkdir $WLDIR
-    # fi 
+    # Qt and GTK config
     
-    # stage the .desktop file
-    # sudo cp Extras/hyprland.desktop /usr/share/wayland-sessions/
-
-    # setup the first look and feel as dark
-    #xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
-
     gsettings set org.gnome.desktop.interface gtk-theme 'Orchis-Dark-Compact'
     gsettings set org.gnome.desktop.interface icon-theme 'Tela-circle-dark'
-
     gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Snow'
     
     sudo sed -i 's/Inherits=Adwaita/Inherits=Breeze_Snow/' /usr/share/icons/default/index.theme
+    cp -r theme_config/gtk-3.0 ~/.config/
+    cp -r theme_config/xsettingsd ~/.config/
+    cp -r theme_config/qt5ct ~/.config/
+    cp -r theme_config/qt6ct ~/.config/
 
-    mkdir -p ~/.config/ranger/plugins && git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons &>> $INSTLOG
+    cp theme_config/.gtkrc-2.0 ~/
+
+    mkdir -p ~/.local/share/icons/default
+    cp theme_config/index.theme ~/.local/share/icons/default/
 fi
 
 # zsh setup
@@ -307,7 +303,18 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
 
     cp zsh_config/.zshrc ~/.zshrc
     cp zsh_config/andrew.zsh-theme ~/.oh-my-zsh/themes/
+    chsh -s $(which zsh)
 fi
+
+# Global Env vars
+PROFILE_FILE="/etc/profile.d/00-custom-env.sh"
+
+sudo bash -c "cat > $PROFILE_FILE" << EOF
+    #!/bin/bash
+    export EDITOR=nvim
+    export VISUAL=nvim
+EOF
+
 
 ### Script is done ###
 echo -e "$CNT - Script had completed!"

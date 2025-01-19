@@ -8,10 +8,10 @@
 @define-color main-bg #000000;
 @define-color main-fg #FFA6C2;
 
-@define-color wb-act-bg #0088CC;
+@define-color wb-act-bg #01A3E7;
 @define-color wb-act-fg #000000;
 
-@define-color wb-hvr-bg #01FEFD;
+@define-color wb-hvr-bg #33ccff;
 @define-color wb-hvr-fg #000000;
 
 window {

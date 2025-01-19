@@ -32,6 +32,8 @@ while IFS= read -r program || [[ -n "$program" ]]; do
         else
             cp -r "$SRC" "$DEST"
         fi
+    elif [[ -f "$SRC" ]]; then
+        cp "$SRC" "$DEST"
     else
         echo "Warning: Configuration for $program not found in ~/.config/"
     fi

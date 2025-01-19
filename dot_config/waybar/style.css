@@ -55,9 +55,8 @@ tooltip{
 }
 #custom-playerlabel {
     background: transparent;
-    padding-left: 10px;
-    padding-right: 15px;
     border-radius: 16px;
+    padding: 0 8px;
     /*border-left: solid 1px #282738;*/
     /*border-right: solid 1px #282738;*/
     margin-top: 5px;
@@ -65,6 +64,15 @@ tooltip{
     font-weight: normal;
     font-style: normal;
 }
+
+#custom-playerlabel.Paused {
+    opacity: 0.6;
+}
+
+#custom-playerlabel.Playing {
+    opacity: 1;
+}
+
 #custom-playerctl {
 	background: #282828;
 	padding-left: 15px;
@@ -177,11 +185,10 @@ tooltip{
 	border-radius: 16px;
 }
 
-#custom-panel {
-    padding: 0 10px;
+#custom-notification {
+    padding: 0 15px 0 10px;
     background-color: rgba(0, 0, 0, 0.192);
 }
-
 
 #custom-randwall {
     color: #f4d9e1;
