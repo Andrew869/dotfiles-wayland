@@ -1,109 +1,158 @@
+// Config //
 configuration {
-    modes: "window,run,ssh,drun";
-    sorting-method: "normal";
-    show-icons:true;
-    matching: "regex";
-    drun-match-fields: "name";
-    display-run: "Menu:";
-    display-ssh: "SSH:";
-    display-drun: "Apps:";
-    display-window: "Windows:";
+    modi:                        "drun,filebrowser,window,run";
+    show-icons:                  true;
+    display-drun:                " ";
+    display-run:                 " ";
+    display-filebrowser:         " ";
+    display-window:              " ";
+    drun-display-format:         "{name}";
+    window-format:               "{w}{t}";
+    font:                        "JetBrainsMono Nerd Font 10";
+    icon-theme:                  "Adwaita";
 }
 
-@theme "tokyo"
+@theme "theme.rasi"
 
-* {
-    font: "Iosevka Nerd Font 12";
 
-    background-color:   transparent;
-    text-color:         @fg0;
-
-    margin:     0px;
-    padding:    0px;
-    spacing:    0px;
-}
-
+// Main //
 window {
-    location:       center;
-    width:          480px;
-    height:         400px;
-    y-offset:       -20;
-    border-radius:  24px;
-
-    border: 1px;
-    border-color: @bg3;
-    background-color:   @bg0;
+    height:                      33em;
+    width:                       63em;
+    transparency:                "real";
+    fullscreen:                  false;
+    enabled:                     true;
+    cursor:                      "default";
+    spacing:                     0em;
+    padding:                     0em;
+    border-radius:               24px;
+    border: 2px;
+    border-color:                #33ccff;
+    background-color:            #11111b;
 }
-
 mainbox {
-    padding:    12px;
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     0em;
+    orientation:                 horizontal;
+    children:                    [ "dummywall" , "listbox" ];
+    background-color:            transparent;
+}
+dummywall {
+    spacing:                     0em;
+    padding:                     0em;
+    width:                       37em;
+    expand:                      false;
+    orientation:                 horizontal;
+    children:                    [ "mode-switcher" , "inputbar" ];
+    background-color:            transparent;
+    background-image:            url("~/.config/resources/kath.jpg", height);
 }
 
+
+// Modes //
+mode-switcher{
+    orientation:                 vertical;
+    enabled:                     true;
+    width:                       3.8em;
+    padding:                     9.2em 0.5em 9.2em 0.5em;
+    spacing:                     1.2em;
+    background-color:            transparent;
+    background-image:            url("~/.config/resources/kath.jpg", height);
+}
+button {
+    cursor:                      pointer;
+    border-radius:               2em;
+    background-color:            #11111be6;
+    text-color:                  #00ff99;
+}
+button selected {
+    background-color:            #00ff99;
+    text-color:                  #11111be6;
+}
+
+
+// Inputs //
 inputbar {
-    background-color:   @bg1;
-    border-color:       @bg3;
-    border-radius:  16px;
-    border:         2px;
-
-    padding:    8px 16px;
-    spacing:    8px;
-    children:   [ prompt, entry ];
+    enabled:                     true;
+    children:                    [ "entry" ];
+    background-color:            transparent;
 }
-
-prompt {
-    text-color: @blue;
-}
-
 entry {
-    placeholder:        "Search";
-    placeholder-color:  @cyan;
+    enabled:                     false;
 }
 
-message {
-    margin:             12px 0 0;
-    border-radius:      16px;
-    border-color:       @bg2;
-    background-color:   @bg2;
+
+// Lists //
+listbox {
+    spacing:                     0em;
+    padding:                     2em;
+    children:                    [ "dummy" , "listview" , "dummy" ];
+    background-color:            transparent;
+}
+listview {
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     0em;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    expand:                      false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    cursor:                      "default";
+    background-color:            transparent;
+    text-color:                  @main-fg;
+}
+dummy {
+    background-color:            transparent;
+}
+
+
+// Elements //
+element {
+    enabled:                     true;
+    spacing:                     0.8em;
+    padding:                     0.4em 0.4em 0.4em 1.5em;
+    cursor:                      pointer;
+    background-color:            transparent;
+    text-color:                  @main-fg;
+}
+element selected.normal {
+    border-radius:               12px;
+    background-color:            #33ccff;
+    text-color:                  @select-fg;
+}
+element-icon {
+    size:                        2.8em;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+
+// Error message //
+error-message {
+    text-color:                  @main-fg;
+    background-color:            @main-bg;
+    text-transform:              capitalize;
+    children:                    [ "textbox" ];
 }
 
 textbox {
-    padding:    8px 24px;
-    background-color:   @bg2;
-}
-
-listview {
-    background-color:   transparent;
-    margin:     12px 0 0;
-    columns:    1;
-    lines:      2;
-
-    fixed-height: false;
-}
-
-element {
-    padding:        8px 16px;
-    spacing:        8px;
-    border-radius:  16px;
-}
-
-element normal urgent {
-  text-color: @urgent;
-}
-
-element normal active {
-    text-color: @accent;
-}
-
-element selected normal, element selected active {
-    background-color:   @bg2;
-}
-
-element-icon {
-    size:           1em;
-    vertical-align: 0.5;
-}
-
-element-text {
-    text-color: inherit;
+    text-color:                  inherit;
+    background-color:            inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
 }
 
