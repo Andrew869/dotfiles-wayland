@@ -8,6 +8,7 @@ firefox
 fzf
 man
 hyprpicker
+hyprlock
 imagemagick
 kitty
 fastfetch
@@ -21,7 +22,7 @@ pipes.sh
 ranger
 python-pillow
 trash-cli
-sddm-git
+sddm
 slurp
 swaybg
 ttf-firacode-nerd
