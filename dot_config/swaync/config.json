@@ -40,6 +40,15 @@
 		"brightness-control": {
 			"state": "transient",
 			"app-name": "brightness_control"
+		},
+		"spotify-song": {
+			"state": "transient",
+			"app-name": "Spotify"
+		},
+		"onedrive-start": {
+			"state": "transient",
+			"summary": "OneDrive Client for Linux",
+			"body": "Initialising filesystem inotify monitoring ..."
 		}
 	},
 
@@ -53,7 +62,6 @@
 	"widgets": [
 		"label",
 		"buttons-grid",
-		"backlight",
 		"mpris",
 		"volume",
 		"title",
